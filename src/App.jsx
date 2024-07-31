@@ -62,7 +62,7 @@ function App() {
 
           @media (max-width: 768px) {
             h1 {
-              font-size: 2em !important;
+              font-size: 1.8em !important;
             }
           }
         `}

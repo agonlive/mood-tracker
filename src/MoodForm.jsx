@@ -42,6 +42,7 @@ function MoodForm() {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         <Form.Field style={{ marginBottom: '0.7em', width: '100%' }}>
                             <Radio
+                                style={{ fontSize: '1.2em' }}
                                 label='🥺 แย่'
                                 name='moodRadioGroup'
                                 value='แย่'
@@ -51,6 +52,7 @@ function MoodForm() {
                         </Form.Field>
                         <Form.Field style={{ marginBottom: '0.7em', width: '100%' }}>
                             <Radio
+                                style={{ fontSize: '1.2em' }}
                                 label='😐 กลาง'
                                 name='moodRadioGroup'
                                 value='กลาง'
@@ -60,6 +62,7 @@ function MoodForm() {
                         </Form.Field>
                         <Form.Field style={{ width: '100%' }}>
                             <Radio
+                                style={{ fontSize: '1.2em' }}
                                 label='☺️ ดี'
                                 name='moodRadioGroup'
                                 value='ดี'
@@ -72,7 +75,7 @@ function MoodForm() {
 
                 <Form.Group grouped>
                     <Form.Field>
-                        <label style={labelStyle}>วันนี้กินข้าวกับอะไร</label>
+                        <label style={labelStyle}>🍛 วันนี้กินข้าวกับอะไร</label>
                         <Form.Input
                             placeholder='เช่น ข้าวผัด, ส้มตำ'
                             value={meal}
@@ -82,7 +85,7 @@ function MoodForm() {
                     </Form.Field>
                 </Form.Group>
 
-                <Button type='submit' primary fluid style={{ fontSize: '1.1em' }}>บันทึกข้อมูล</Button>
+                <Button type='submit' primary fluid style={{ fontSize: '1.1em' }}>✨ บันทึกข้อมูล</Button>
                 <Message
                     success
                     header='บันทึกข้อมูลสำเร็จ'
