@@ -22,13 +22,25 @@ function MoodForm() {
         setLoading(false);
     };
 
+    const formStyle = {
+        fontFamily: "'Noto Sans Thai', sans-serif",
+        fontSize: '1em',
+    };
+
+    const labelStyle = {
+        color: 'black',
+        fontSize: '1.2em',
+        marginBottom: '0.7em',
+        fontWeight: 500
+    };
+
     return (
         <Segment padded="very" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', margin: '0 auto', maxWidth: '100%' }}>
-            <Form onSubmit={handleSubmit} success={success} loading={loading}>
+            <Form onSubmit={handleSubmit} success={success} loading={loading} style={formStyle}>
                 <Form.Group grouped>
-                    <label style={{ color: 'black', fontSize: '1.1em', marginBottom: '0.5em' }}>วันนี้อารมณ์ PD 🌟 เป็นอย่างไร</label>
+                    <label style={labelStyle}>วันนี้อารมณ์เป็นอย่างไร</label>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <Form.Field style={{ marginBottom: '0.5em', width: '100%' }}>
+                        <Form.Field style={{ marginBottom: '0.7em', width: '100%' }}>
                             <Radio
                                 label='🥺 แย่'
                                 name='moodRadioGroup'
@@ -37,7 +49,7 @@ function MoodForm() {
                                 onChange={(e, { value }) => setMood(value)}
                             />
                         </Form.Field>
-                        <Form.Field style={{ marginBottom: '0.5em', width: '100%' }}>
+                        <Form.Field style={{ marginBottom: '0.7em', width: '100%' }}>
                             <Radio
                                 label='😐 กลาง'
                                 name='moodRadioGroup'
@@ -60,20 +72,22 @@ function MoodForm() {
 
                 <Form.Group grouped>
                     <Form.Field>
-                        <label style={{ color: 'black', fontSize: '1.1em' }}>วันนี้กินข้าวกับอะไร</label>
+                        <label style={labelStyle}>วันนี้กินข้าวกับอะไร</label>
                         <Form.Input
                             placeholder='เช่น ข้าวผัด, ส้มตำ'
                             value={meal}
                             onChange={(e) => setMeal(e.target.value)}
+                            style={{ fontSize: '1em' }}
                         />
                     </Form.Field>
                 </Form.Group>
 
-                <Button type='submit' primary fluid>บันทึกข้อมูล</Button>
+                <Button type='submit' primary fluid style={{ fontSize: '1.1em' }}>บันทึกข้อมูล</Button>
                 <Message
                     success
                     header='บันทึกข้อมูลสำเร็จ'
                     content='ข้อมูลอารมณ์ของคุณถูกบันทึกเรียบร้อยแล้ว'
+                    style={{ fontSize: '1em' }}
                 />
             </Form>
         </Segment>

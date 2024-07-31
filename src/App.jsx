@@ -44,12 +44,33 @@ function App() {
           body {
             font-family: 'Noto Sans Thai', sans-serif;
           }
+
+          body {
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 16px;
+          }
+
+          @media (max-width: 768px) {
+            body {
+              font-size: 18px;
+            }
+          }
+
+          h1 {
+            font-size: 2.5em !important;
+          }
+
+          @media (max-width: 768px) {
+            h1 {
+              font-size: 2em !important;
+            }
+          }
         `}
       </style>
       <div style={containerStyle}>
         <div style={backgroundStyle}></div>
         <Container fluid style={{ padding: 0 }}>
-          <Header as='h1' textAlign='center' style={{ color: 'white', marginBottom: '2rem', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', position: 'sticky' }}>บันทึกอารมณ์ประจำวัน</Header>
+          <Header as='h1' textAlign='center' style={{ color: 'white', marginBottom: '2rem', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', position: 'sticky' }}>📅 บันทึกอารมณ์ประจำวัน</Header>
           <Grid centered columns={1}>
             <Grid.Column mobile={16} tablet={16} computer={12}>
               <MoodForm />
