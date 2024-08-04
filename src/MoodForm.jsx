@@ -1,25 +1,53 @@
 import React, { useState } from 'react';
 import { Form, Button, Radio, Message, Segment } from 'semantic-ui-react';
-import axios from 'axios';
 
 function MoodForm() {
     const [mood, setMood] = useState('');
     const [meal, setMeal] = useState('');
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setError(null);
+
+        const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+
         try {
-            await axios.post('/api/moods', { mood, meal });
+            const response = await fetch('https://sheetdb.io/api/v1/apk71jlwjb97m', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: [
+                        {
+                            'mood': mood,
+                            'food': meal,
+                            'date': currentDate
+                        }
+                    ]
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log(data);
             setSuccess(true);
             setMood('');
             setMeal('');
         } catch (error) {
             console.error('Error submitting mood:', error);
+            setError('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     const formStyle = {
@@ -31,19 +59,19 @@ function MoodForm() {
         color: 'black',
         fontSize: '1.2em',
         marginBottom: '0.7em',
-        fontWeight: 500
+        fontWeight: 'bold'
     };
 
     return (
         <Segment padded="very" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', margin: '0 auto', maxWidth: '100%' }}>
-            <Form onSubmit={handleSubmit} success={success} loading={loading} style={formStyle}>
+            <Form onSubmit={handleSubmit} success={success} error={!!error} loading={loading} style={formStyle}>
                 <Form.Group grouped>
                     <label style={labelStyle}>วันนี้อารมณ์เป็นอย่างไร</label>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         <Form.Field style={{ marginBottom: '0.7em', width: '100%' }}>
                             <Radio
-                                style={{ fontSize: '1.2em' }}
                                 label='🥺 แย่'
+                                style={{ fontSize: '1.2em' }}
                                 name='moodRadioGroup'
                                 value='แย่'
                                 checked={mood === 'แย่'}
@@ -52,8 +80,8 @@ function MoodForm() {
                         </Form.Field>
                         <Form.Field style={{ marginBottom: '0.7em', width: '100%' }}>
                             <Radio
-                                style={{ fontSize: '1.2em' }}
                                 label='😐 กลาง'
+                                style={{ fontSize: '1.2em' }}
                                 name='moodRadioGroup'
                                 value='กลาง'
                                 checked={mood === 'กลาง'}
@@ -62,8 +90,8 @@ function MoodForm() {
                         </Form.Field>
                         <Form.Field style={{ width: '100%' }}>
                             <Radio
-                                style={{ fontSize: '1.2em' }}
                                 label='☺️ ดี'
+                                style={{ fontSize: '1.2em' }}
                                 name='moodRadioGroup'
                                 value='ดี'
                                 checked={mood === 'ดี'}
@@ -75,7 +103,7 @@ function MoodForm() {
 
                 <Form.Group grouped>
                     <Form.Field>
-                        <label style={labelStyle}>🍛 วันนี้กินข้าวกับอะไร</label>
+                        <label style={labelStyle}>วันนี้กินข้าวกับอะไร</label>
                         <Form.Input
                             placeholder='เช่น ข้าวผัด, ส้มตำ'
                             value={meal}
@@ -85,11 +113,17 @@ function MoodForm() {
                     </Form.Field>
                 </Form.Group>
 
-                <Button type='submit' primary fluid style={{ fontSize: '1.1em' }}>✨ บันทึกข้อมูล</Button>
+                <Button type='submit' primary fluid style={{ fontSize: '1.1em' }}>บันทึกข้อมูล</Button>
                 <Message
                     success
                     header='บันทึกข้อมูลสำเร็จ'
                     content='ข้อมูลอารมณ์ของคุณถูกบันทึกเรียบร้อยแล้ว'
+                    style={{ fontSize: '1em' }}
+                />
+                <Message
+                    error
+                    header='เกิดข้อผิดพลาด'
+                    content={error}
                     style={{ fontSize: '1em' }}
                 />
             </Form>
