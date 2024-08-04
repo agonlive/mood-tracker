@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Container, Header, Grid, Input, Button } from 'semantic-ui-react';
 import MoodForm from './MoodForm';
 import 'semantic-ui-css/semantic.min.css';
+import Dashboard from './Dashboard';
+import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const [backgroundUrl, setBackgroundUrl] = useState('');
@@ -9,6 +12,7 @@ function App() {
 
   const handleUrlChange = (e, { value }) => setTempUrl(value);
   const handleUrlSubmit = () => setBackgroundUrl(tempUrl);
+  // const location = useLocation();
 
   const containerStyle = {
     minHeight: '100vh',
@@ -73,7 +77,16 @@ function App() {
           <Header as='h1' textAlign='center' style={{ color: 'white', marginBottom: '2rem', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', position: 'sticky' }}>📅 บันทึกอารมณ์ประจำวัน</Header>
           <Grid centered columns={1}>
             <Grid.Column mobile={16} tablet={16} computer={12}>
-              <MoodForm />
+              <AnimatePresence mode="wait">
+                <Router>
+                  <Routes Routes >
+                    <Route path="/" element={<MoodForm />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                  </Routes>
+                </Router>
+              </AnimatePresence>
+              {/* <MoodForm /> */}
+              {/* <Dashboard /> */}
             </Grid.Column>
           </Grid>
 
