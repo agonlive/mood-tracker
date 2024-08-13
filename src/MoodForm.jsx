@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Radio, Message, Segment } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 function MoodForm() {
     const [mood, setMood] = useState('');
@@ -126,8 +127,11 @@ function MoodForm() {
                     </Form.Group>
 
                     <Button type='submit' primary fluid style={{ fontSize: '1.1em', marginBottom: '8px' }}>  บันทึกข้อมูล 📝</Button>
-                    <Button type='button' secondary fluid style={{ fontSize: '1.1em' }} onClick={handleDashboardClick}>
+                    <Button type='button' secondary fluid style={{ fontSize: '1.1em', marginBottom: '8px' }} onClick={handleDashboardClick}>
                         ไปดู Dashboard 📊
+                    </Button>
+                    <Button type='button' secondary fluid style={{ fontSize: '1.1em' }} onClick={() => navigate('/mood-tracker/eggycoin')}>
+                        คำนวน Eggy Coin 🪙
                     </Button>
                     <Message
                         success

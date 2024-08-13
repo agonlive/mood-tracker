@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import Dashboard from './Dashboard';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import EggyCoinCalculator from './EggyCoinCalculator';
 
 function App() {
   const [backgroundUrl, setBackgroundUrl] = useState('');
@@ -82,6 +83,10 @@ function App() {
                   <Routes Routes >
                     <Route path="/" element={<MoodForm />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/eggycoin" element={<EggyCoinCalculator />} />
+                    <Route path="/mood-tracker" element={<MoodForm />} />
+                    <Route path="/mood-tracker/dashboard" element={<MoodForm />} />
+                    <Route path="/mood-tracker/eggycoin" element={<EggyCoinCalculator />} />
                   </Routes>
                 </Router>
               </AnimatePresence>

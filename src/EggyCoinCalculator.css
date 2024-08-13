@@ -1,0 +1,38 @@
+.eggy-coin-form {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.eggy-coin-icon,
+.money-icon {
+  margin-right: 10px;
+}
+
+.eggy-coin-input,
+.thb-input {
+  flex-grow: 1;
+}
+
+@media (max-width: 767px) {
+  .eggy-coin-form {
+    flex-direction: column;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  .eggy-coin-input,
+  .thb-input {
+    width: 100%;
+  }
+}
